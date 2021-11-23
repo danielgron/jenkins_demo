@@ -9,7 +9,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'cd jenkins-maven'
-                sh 'mvn -B'
+                sh 'mvn -B compile'
+                sh 'mvn -B test'
+                sh 'mvn -B package'
             }
         }
     }
