@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                cd 'jenkins-maven'
+                sh 'cd jenkins-maven'
                 sh 'mvn -B'
             }
         }
