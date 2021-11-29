@@ -1,0 +1,33 @@
+#https://docs.sonarqube.org/latest/setup/install-server/
+version: "3"
+
+services:
+  jenkins-docker:
+    image: docker:dind
+    hostname: docker
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    ports:
+      - "2376:2376"
+    volumes:
+      - jenkins-data1:/var/jenkins_home
+      - jenkins-docker-certs1:/certs/client
+    privileged: true
+    command: --storage-driver=overlay2
+
+  jenkins:
+    build: ./
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    ports:
+      - "8090:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins-data1:/var/jenkins_home
+      - jenkins-docker-certs1:/certs/client:ro
+
+volumes:
+  jenkins-data1:
+  jenkins-docker-certs1:
