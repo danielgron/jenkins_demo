@@ -10,8 +10,8 @@ services:
     ports:
       - "2376:2376"
     volumes:
-      - jenkins-data1:/var/jenkins_home
-      - jenkins-docker-certs1:/certs/client
+      - jenkins-data-demo:/var/jenkins_home
+      - jenkins-docker-certs-demo:/certs/client
     privileged: true
     command: --storage-driver=overlay2
 
@@ -25,9 +25,9 @@ services:
       - "8090:8080"
       - "50000:50000"
     volumes:
-      - jenkins-data1:/var/jenkins_home
-      - jenkins-docker-certs1:/certs/client:ro
+      - jenkins-data-demo:/var/jenkins_home
+      - jenkins-docker-certs-demo:/certs/client:ro
 
 volumes:
-  jenkins-data1:
-  jenkins-docker-certs1:
+  jenkins-data-demo:
+  jenkins-docker-certs-demo:
